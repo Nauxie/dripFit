@@ -24,7 +24,7 @@
   display: table;
   float: right;
   font-size: 30px;
-  color: #4da6f4;
+  color: #1f85de;
   font-weight: 900;
 }
 .navigation {
@@ -41,12 +41,13 @@
   padding: 0px 5px;
 }
 .navigation li {
-  border-bottom: 1px solid #c0c9d0;
+  border-bottom: 1px solid #1f85de;
   padding-bottom: 1px;
   font-size: 15px;
+  font-weight: 900;
 }
 .navigation li:hover {
-  border-bottom: 1px solid #4da6f4;
+  border-bottom: 1px solid#9BCCF7;
   padding-bottom: 1px;
 }
 .right_link {

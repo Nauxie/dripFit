@@ -1,0 +1,44 @@
+.scene {
+  width: 200px !important;
+  height: 300px !important;
+  perspective: 600px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.8s;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+
+  float: left;
+
+  background-color: rgb(35, 35, 61);
+  color: aliceblue;
+}
+.scene:hover {
+  background-color: #5b85da;
+}
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+.card__face {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+}
+.card__face--front {
+  background-color: transparent;
+}
+
+.card__face--back {
+  background-color: #5b85da;
+  border-radius: 4px;
+
+  transform: rotateY(180deg);
+}
+.card.is-flipped {
+  transform: rotateY(180deg);
+}

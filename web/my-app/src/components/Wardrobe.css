@@ -1,0 +1,13 @@
+.outer_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+  text-align: center;
+  margin-left: 50px !important;
+}
+.wrapper {
+  text-align: center;
+  margin-right: 100px;
+}
