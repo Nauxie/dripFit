@@ -1,0 +1,59 @@
+.outerdiv {
+  width: 100%;
+  height: 80px;
+  display: block;
+  font-family: Arial;
+  font-size: 20px;
+}
+.inner_outerdiv {
+  width: 1000px;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.titlelogo {
+  color: #9b85f6;
+  font-family: 'Arial';
+  height: 100%;
+  display: table;
+  float: left;
+  list-style-type: none;
+}
+.titlelogo a {
+  height: 100%;
+  display: table;
+  float: right;
+  font-size: 30px;
+  color: #4da6f4;
+  font-weight: 900;
+}
+.navigation {
+  float: right;
+  height: 100%;
+  color: #9b85f6;
+  font-family: 'Arial';
+  list-style-type: none;
+}
+.navigation a {
+  height: 100%;
+  display: table;
+  float: left;
+  padding: 0px 5px;
+}
+.navigation li {
+  border-bottom: 1px solid #c0c9d0;
+  padding-bottom: 1px;
+  font-size: 15px;
+}
+.navigation li:hover {
+  border-bottom: 1px solid #4da6f4;
+  padding-bottom: 1px;
+}
+.right_link {
+  color: #4da6f4;
+  font-size: 20px;
+}
+a {
+  text-decoration: none;
+  font-family: 'Arial';
+}
