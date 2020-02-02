@@ -8,7 +8,7 @@ const Header = () => (
         <ul className='titlelogo'>
           <Link to='/'>
             <a href='/'>
-              <li>fitDrip</li>
+              <li>dripFit</li>
             </a>
           </Link>
         </ul>
@@ -18,14 +18,14 @@ const Header = () => (
               <li>my wardrobe</li>
             </a>
           </Link>
-          <Link to='/add' x>
+          <Link to='/add'>
             <a className='right_link' href='/add'>
               <li>add</li>
             </a>
           </Link>
-          <Link to='/fit' x>
+          <Link to='/recommend'>
             <a className='right_link' href='/fit'>
-              <li>random fit</li>
+              <li>recommend fit</li>
             </a>
           </Link>
         </ul>

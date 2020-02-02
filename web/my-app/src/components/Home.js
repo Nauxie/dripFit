@@ -2,6 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import Header from './Header';
 import './Home.css';
+import allowed from './allowedArticles';
+import rgbHex from 'rgb-hex';
+import namer from 'color-namer';
+import hexRgb from 'hex-rgb';
 
 class Home extends React.Component {
   constructor(props) {
@@ -12,9 +16,17 @@ class Home extends React.Component {
       questionRender: false,
       labelData: [],
       colorData: [],
-      imgShow: false
+      imgShow: false,
+      userInput: false,
+      articleGuess: '',
+      type: '',
+      tags: '',
+      likeColors: []
     };
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
+    this.handleTypeChange = this.handleTypeChange.bind(this);
+    this.handleTagChange = this.handleTagChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   fileSelectedHandler = event => {
@@ -61,83 +73,58 @@ class Home extends React.Component {
         });
     }
   };
+  handleYesClick = () => {
+    this.setState({ userInput: true });
+    let hexColor = this.state.colorData[0].color;
+    console.log(hexColor);
+    let pureRgb = hexRgb(hexColor);
+    let rgb = [pureRgb.red, pureRgb.green, pureRgb.blue];
+    console.log(rgb);
+    axios
+      .post('https://cors-anywhere.herokuapp.com/http://colormind.io/api/', {
+        input: [rgb, 'N', 'N', 'N', 'N'],
+        model: 'default'
+      })
+      .then(data => {
+        console.log(data.data);
+        this.setState({ likeColors: data.data.result });
+      });
+  };
+
+  handleTypeChange(event) {
+    this.setState({ type: event.target.value });
+  }
+  handleTagChange(event) {
+    this.setState({ tags: event.target.value });
+  }
+  handleSubmit(event) {
+    let hexLikes = this.state.likeColors.map(rgbArr => rgbHex(...rgbArr));
+    console.log(hexLikes);
+    let nameColorLikes = hexLikes.map(hex => namer('#' + hex));
+    console.log(nameColorLikes);
+    let onlyNames = nameColorLikes.map(obj => obj.basic[0].name);
+    console.log(onlyNames);
+
+    let guess = '';
+    for (let i = 0; i < this.state.labelData.length; i++) {
+      if (allowed.includes(this.state.labelData[i])) {
+        guess = this.state.labelData[i];
+        break;
+      }
+    }
+    axios
+      .post('http://localhost:3001/sendData', {
+        articleClassification: guess,
+        color: this.state.colorData[0].label,
+        colorGoesWith: onlyNames.slice(3, 5),
+        type: this.state.type,
+        tags: this.state.tags.split(','),
+        filename: this.state.selectedFile.name
+      })
+      .then(response => console.log(response));
+  }
 
   render() {
-    let allowed = [
-      'T-shirt',
-      'Jeans',
-      'Shirt',
-      'Sweater',
-      'Trousers',
-      'Cargo Pants',
-      'Hoodie',
-      'Jacket',
-      'Dress Shirt',
-      'Collar',
-      'Suit',
-      'Sweatpant',
-      'Leggings',
-      'Tights',
-      'Khaki',
-      'Polo Shirt',
-      'Suit',
-      'Shorts',
-      'Blazer',
-      'Footwear',
-      'Shoe',
-      'Pajamas',
-      'Coat',
-      'Leather Jacket',
-      'Trench Coat',
-      'Overcoat',
-      'Crop Top',
-      'Pajamas',
-      'Coat',
-      'Pencil Skirt',
-      'Dress',
-      'Gown',
-      'Pantsuit',
-      'Suit Trousers',
-      'Cardigan',
-      'Long-sleeved T-shirt',
-      'Sweatshirt',
-      'Jersey',
-      'Plaid',
-      'Denim',
-      'Parka',
-      'Tuxedo',
-      'Robe',
-      'Gown',
-      'Flip-flop',
-      'Sandal',
-      'Slipper',
-      'Knee-high Boot',
-      'Uniform',
-      'Boot',
-      'Dress Shoe',
-      'Active Pants',
-      'Rain Pants',
-      'Yoga Pants',
-      'High Heels',
-      'Riding Boot',
-      'Slingback',
-      'Court Shoe',
-      'Skort',
-      'Cocktail Dress',
-      'Cowboy Boot',
-      'Sneakers',
-      'Skate Shoe',
-      'Walking Shoe',
-      'Athletic Shoe',
-      'Running Shoe',
-      'Plimsoll Shoe',
-      'Tennis Shoe',
-      'Outdoor Shoe',
-      'Rain Boot',
-      'Durango Boot',
-      'Snow Boot',
-      'Wedge'
-    ];
     let imgRender = () => {
       if (this.state.imgShow) {
         let imgSource = '/images/' + this.state.selectedFile.name;
@@ -152,21 +139,72 @@ class Home extends React.Component {
         return <h1> </h1>;
       } else {
         //const resource = fetchData('sweater.jpg');
-        console.log(this.state.labelData);
         for (let i = 0; i < this.state.labelData.length; i++) {
           if (allowed.includes(this.state.labelData[i])) {
             guess = this.state.labelData[i];
             break;
           }
         }
-        console.log(guess);
-        console.log(this.state.colorData[0].label);
+
         let returnString = '';
         returnString = `${
           this.state.colorData[0].label
         } ${guess.toLowerCase()}?`;
 
-        return <h1>{returnString}</h1>;
+        return (
+          <div>
+            <h1>{returnString}</h1>
+            <div>
+              <button className='uploadbutton2' onClick={this.handleYesClick}>
+                Yes
+              </button>{' '}
+              <button className='uploadbutton2' onClick={this.handleNoClick}>
+                No
+              </button>
+            </div>
+          </div>
+        );
+      }
+    };
+
+    let finalSave = () => {
+      if (this.state.userInput) {
+        return (
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <div>
+                <label>
+                  Type:
+                  <input
+                    className='finalInput'
+                    type='text'
+                    value={this.state.type}
+                    onChange={this.handleTypeChange}
+                    placeholder='Ex: Top, Bottom, etc.'
+                  />
+                </label>
+              </div>
+              <div>
+                <label>
+                  Tags:
+                  <input
+                    className='finalInput'
+                    type='text'
+                    value={this.state.tags}
+                    onChange={this.handleTagChange}
+                    placeholder='Ex: Winter, Casual, etc.'
+                  />
+                </label>
+              </div>
+
+              <input
+                type='submit'
+                value='Save to wardrobe'
+                className='uploadbutton3'
+              />
+            </form>
+          </div>
+        );
       }
     };
     return (
@@ -193,6 +231,7 @@ class Home extends React.Component {
         </div>
         <div className='imageArticleDiv'>{imgRender()}</div>
         <div className='question'>{question()}</div>
+        <div className='question'>{finalSave()}</div>
       </div>
     );
   }

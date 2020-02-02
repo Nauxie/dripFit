@@ -12,9 +12,11 @@
 }
 
 body {
+  background: rgb(174, 223, 241);
   background: linear-gradient(
+    180deg,
     rgba(174, 223, 241, 1) 0%,
-    rgba(111, 255, 221, 1) 100%
+    rgba(202, 244, 250, 1) 100%
   );
   height: 100%;
   margin: 0;
@@ -59,6 +61,28 @@ body {
   color: white;
   font-size: 15px;
 }
+.uploadbutton2 {
+  background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+  border-radius: 10px;
+  width: 70px;
+  height: 30px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: white;
+  font-size: 15px;
+}
+.uploadbutton3 {
+  background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%);
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: white;
+  font-size: 15px;
+}
 .uploadbuttonwrapper {
   text-align: center;
 }
@@ -74,4 +98,8 @@ body {
   margin-top: 25px;
   display: block;
   text-align: center;
+}
+.finalInput {
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
