@@ -1,3 +1,9 @@
+
+![Image](./images/image1.png)
+![Image](./images/image2.png)
+![Image](./images/image3.png)
+![Image](./images/image4.png)
+
 # TO TEST, run the following commands in their corresponding directories:
 
 npm start in /web/my-app/src
@@ -40,7 +46,3 @@ We learned how Google Computer Vision works and understands how to connect all t
 
 We want to continue developing dripFit by making a mobile app, potentially with React Native.
 
-![Image](./images/image1.png)
-![Image](./images/image2.png)
-![Image](./images/image3.png)
-![Image](./images/image4.png)
