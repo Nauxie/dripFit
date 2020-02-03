@@ -4,6 +4,8 @@
 ![Image](./images/image3.png)
 ![Image](./images/image4.png)
 
+check out the devpost here: https://devpost.com/software/dripfit-9t5avb
+
 # TO TEST, run the following commands in their corresponding directories:
 
 npm start in ./web/my-app/
