@@ -1,8 +1,11 @@
 # TO TEST, run the following commands in their corresponding directories:
 
 npm start in /web/my-app/src
+
 npm start in /web/my-app/server
+
 node index.js in /server_db (need to enter either a local or cloud mongo key in properties)
+
 then head to http://localhost:3000/
 
 ## Inspiration
