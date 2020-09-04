@@ -12,7 +12,7 @@
     "color-namer": "^1.4.0",
     "colornames": "^1.1.1",
     "hex-rgb": "^4.1.0",
-    "react": "0.0.0-experimental-241c4467e",
+    "react": "0.14.0",
     "react-dom": "0.0.0-experimental-241c4467e",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",
